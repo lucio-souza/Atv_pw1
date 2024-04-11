@@ -1,5 +1,3 @@
-import {v4 as uuid} from 'uuid';
-
 type technologiesType={
     id:string,
     title:string,
@@ -8,4 +6,4 @@ type technologiesType={
     created_at:Date
 }
 
-export default technologiesType
+export default technologiesType;

@@ -1,4 +1,3 @@
-import {v4 as uuid} from 'uuid';
 import technologies from './technologiesType';
 
 type UserType={
@@ -7,4 +6,5 @@ type UserType={
     username:string,
     technologies:technologies[]
 }
-export default UserType;
+const user=[] as UserType[];
+export  {UserType,user};
