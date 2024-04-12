@@ -47,4 +47,19 @@ technolgiesRouter.put("/:id",checkExistsUserAccount,(req,res)=>{
     });
 });
 
+technolgiesRouter.patch("/:id/studied",checkExistsUserAccount,(req,res)=>{
+    const username=req.header('username');
+    const id=req.params.id;
+
+    const usuario=user.find(user=>user.username===username)
+    const tecnologia=usuario?.technologies.find(tech=>tech.id===id);
+    if(!tecnologia){
+        return res.status(404).json({
+                    error:'Mensagem de erro'
+               });
+    }
+    tecnologia.studied=true;
+    return res.status(200).json("mudança feita com sucesso")
+})
+
 export default technolgiesRouter;
