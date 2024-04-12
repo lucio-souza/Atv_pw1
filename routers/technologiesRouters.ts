@@ -29,7 +29,22 @@ technolgiesRouter.post("/",checkExistsUserAccount,(req,res)=>{
 });
 
 technolgiesRouter.put("/:id",checkExistsUserAccount,(req,res)=>{
-    
-})
+    const username=req.header('username');
+    const id=req.params.id;
+    const {title,deadline}=req.body;
+
+    const usuario=user.find(user=>user.username===username)
+    const tecnologia=usuario?.technologies.find(tech=>tech.id===id);
+    if(!tecnologia){
+        return res.status(404).json({
+                    error:'Mensagem de erro'
+               });
+    }
+    tecnologia.title=title;
+    tecnologia.deadline=deadline;
+    return res.status(200).json({
+        tecnologia
+    });
+});
 
 export default technolgiesRouter;
