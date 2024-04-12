@@ -1,6 +1,6 @@
 import express from 'express';
 import { Request, Response,NextFunction } from 'express';
-import { user } from '../../model/userType';
+import { user } from '../model/userType';
 
 const checkExistsUserAccount=(req:Request,res:Response,next:NextFunction)=>{
     const {username}=req.headers;
@@ -9,6 +9,7 @@ const checkExistsUserAccount=(req:Request,res:Response,next:NextFunction)=>{
         if(index===-1){
             return res.status(404).json({ error: "Usuário inexistente" });
     }
+    req.userIndex=index;
     next();
     } catch (error) {
         console.error('Erro ao verificar a existência do usuário:', error);
