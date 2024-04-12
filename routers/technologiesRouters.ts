@@ -60,6 +60,21 @@ technolgiesRouter.patch("/:id/studied",checkExistsUserAccount,(req,res)=>{
     }
     tecnologia.studied=true;
     return res.status(200).json("mudança feita com sucesso")
+});
+
+technolgiesRouter.delete("/:id",checkExistsUserAccount,(req,res)=>{
+    const username=req.header('username');
+    const id=req.params.id;
+
+    const userIndex=user.findIndex(user=>user.username===username)
+    const tecnologiaIndex=user[userIndex].technologies.findIndex(tech=>tech.id===id);
+    if(tecnologiaIndex===-1){
+        return res.status(404).json({
+                    error:'Mensagem de erro'
+               });
+    }
+    user[userIndex].technologies.splice(tecnologiaIndex,1)
+    return res.status(200).json("tecnologia apagada com sucesso")
 })
 
 export default technolgiesRouter;
